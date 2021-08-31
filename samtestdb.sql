@@ -39,9 +39,9 @@ VALUES (0, 001, 0, 'Weissman', 'Hans', 2500, '1998-03-12'),
 (3, 002, 1, 'Frans', 'Derek', 2150, '2018-05-01'),
 (4, 001, 1, 'Johnson', 'Matt', 2500, '1998-05-12'),
 (5, 001, 0, 'Schoenhals', 'Andreas', 3200, '2017-12-24'),
-(4, 003, 0, 'Kabelbaum', 'Franz', 1800, '2004-01-22'),
-(4, 002, 1, 'Graupilz', 'Gerhard', 2870, '2001-05-30'),
-(4, 001, 1, 'Nodal', 'Christian', 2470, '2008-06-03');
+(6, 003, 0, 'Kabelbaum', 'Franz', 1800, '2004-01-22'),
+(7, 002, 1, 'Graupilz', 'Gerhard', 2870, '2001-05-30'),
+(8, 001, 1, 'Nodal', 'Christian', 2470, '2008-06-03');
 
 -- Aufgabe 1
 SELECT concat(concat(arb.familie, concat(' ', left(arb.name, 1))), '.') as name, arb.einstell_datum as date
@@ -63,10 +63,10 @@ ORDER BY abteilung_name, salary DESC;
 SELECT abt.abteilung_name as abteilung_name,  COUNT(*), sum(arb.salary) / count(*) as mediane 
 FROM arbeiter arb
 LEFT JOIN abteil abt ON abt.abteilung_id = arb.abteilung_id
-GROUP BY abteilung_name having COUNT(arb.arbeiter_id) > 5;
+GROUP BY abteilung_name having COUNT(arb.arbeiter_id) >= 5;
 
 -- Aufgabe 4
-SELECT arb.name as name, arb.familie as familie, arb.arbeiter_id as arbId,  chief.arbeiter_id as chiefId 
+SELECT arb.name as name, arb.familie as familie 
 FROM arbeiter arb
 LEFT JOIN arbeiter chief ON arb.chief_id = chief.arbeiter_id 
 WHERE arb.salary > chief.salary;
